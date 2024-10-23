@@ -569,11 +569,11 @@ class Arr
     {
         $isAssoc = static::isAssoc($array1 ?: $array2);
         if ($isAssoc) {
-            foreach ($array2 as $key => $value) {
-                if (is_array($value)) {
-                    $array1[$key] = static::merge($array1[$key] ?? [], $value, $unique);
+            foreach ($array2 as $key => $value2) {
+                if (is_array($value2) && isset($array1[$key]) && is_array($array1[$key])) {
+                    $array1[$key] = static::merge($array1[$key], $value2, $unique);
                 } else {
-                    $array1[$key] = $value;
+                    $array1[$key] = $value2;
                 }
             }
         } else {
